@@ -11,29 +11,28 @@
     <body>
         <header>
             <h1>Blackjack</h1>
-            <p>Get your cards. make your move</p>
+            <p id="messageg">Get your cards. make your move</p>
         </header>
         <main>
             <div>
                 <p>Dealers hand: </p>
                 <div class="dealers">
-                    <p>card1</p>
-                    <p>card2</p>
+                    <p id="cardsd">cards</p>
                 </div>
-                <p class="dealer-sum">sum: ?</p>
+                <p id="sumd" class="dealer-sum">sum: ?</p>
             </div>
             <div>
-                <p>Your hand: </p>
+                <p>My hand: </p>
                 <div class="players">
-                    <p>card1</p>
-                    <p>card2</p>
+                    <p id="cardsp">cards</p>
+
                 </div>
-                <p class="player-sum">Your sum: </p>
+                <p id="sump" class="player-sum">Your sum: </p>
             </div>
         </main>
         <footer>
             <h1>What will you do next?</h1>
-            <button>
+            <button onclick="play()">
                 <h1>Play</h1>
                 <p>
                     Start a new Game
