@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&display=swap');
+
+body {
+     background-image: url("img/B-img.jpg");
+     background-size: cover;
+     background-position: center;
+     background-repeat: no-repeat;
+     background-attachment: fixed;
+
+     text-align: center;
+}
+
+header h1{
+    margin-top: 0.5rem;
+    margin-bottom: 0;
+    font-family: 'Playfair Display', serif;
+    font-size: 72px;
+    font-weight: 800;
+    color: #D4AF37;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+}
+
+header p {
+    margin-top: -0.2rem;
+    font-weight: 800;
+    color: #D4AF37;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+main, footer {
+    color: white;
+}
+
+.dealers, .players{
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.dealer-sum,
+.player-sum {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background-color: black;
+}
+
+.dealer-sum {
+    border: 2px solid white;
+    /* border-radius: 15%; */
+}
+
+.player-sum {
+    border: 2px solid #D4AF37;
+    color: #D4AF37;
+
+}
