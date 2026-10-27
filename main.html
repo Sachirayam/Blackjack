@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="sve">
+<html>
     <head>
         <!-- <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
@@ -24,7 +24,7 @@
             <div>
                 <p>My hand: </p>
                 <div class="players">
-                    <p id="cardsp">cards</p>
+                    <p id="cardsp">cards:</p>
 
                 </div>
                 <p id="sump" class="player-sum">Your sum: </p>
@@ -32,19 +32,19 @@
         </main>
         <footer>
             <h1>What will you do next?</h1>
-            <button onclick="play()">
+            <button onclick="startGame()">
                 <h1>Play</h1>
                 <p>
                     Start a new Game
                 </p>
             </button>
-            <button>
+            <button onclick="hit()"">
                 <h1>Hit</h1>
                 <p>
-                    Draw a Card
+                    Draw a newCard
                 </p>
             </button>
-            <button>
+            <button onclick="stand()">
                 <h1>Stand</h1>
                 <p>
                     Keep your hand
