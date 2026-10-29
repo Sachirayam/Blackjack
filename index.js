@@ -1,21 +1,20 @@
 // const dealerCards = document.querySelector("#cardsd");
 // const dealerSum = document.querySelector("#sumd");
+
+let cards = []
+let sum = 0;
+let active = false;
+let won = false;
+let message = "";
+let messageG = document.querySelector("#messageg");
 const playerCards = document.querySelector("#cardsp");
 const playerSum = document.querySelector("#sump");
-let messageG = document.querySelector("#messageg");
 
- let fCard = getRandomNum()
- let sCard = getRandomNum()
-
-let cards = [fCard, sCard]
-let sum = fCard + sCard;
-let message = "";
-let active = true;
-let won = false
+console.log(cards)
 
 function getRandomNum() {
     let randomNum = Math.floor(Math.random()* 13) + 1
-    
+
     if (randomNum > 10) {
         return 10
     } else if (randomNum === 1) {
@@ -25,9 +24,16 @@ function getRandomNum() {
     }
 }
 
-function startGame(){
+function startGame() {
+    active = true;
+    let fCard = getRandomNum();
+    let sCard = getRandomNum();
+    cards = [fCard, sCard]
+    sum = fCard + sCard 
     renderGame()
+    console.log(cards)
 }
+
 
 function renderGame() {
     playerCards.textContent = "Cards: "
@@ -46,7 +52,6 @@ function renderGame() {
     }
     messageG.textContent = message
 }
-
 function hit() {
     messageG.textContent = message = "The dealer agrees to hit the player! (litteraly!)"
     if (active && !won) {
