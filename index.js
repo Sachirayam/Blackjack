@@ -4,8 +4,8 @@ const playerCards = document.querySelector("#cardsp");
 const playerSum = document.querySelector("#sump");
 let messageG = document.querySelector("#messageg");
 
- let fCard = randomCard()
- let sCard = randomCard()
+ let fCard = getRandomNum()
+ let sCard = getRandomNum()
 
 let cards = [fCard, sCard]
 let sum = fCard + sCard;
@@ -13,8 +13,16 @@ let message = "";
 let active = true;
 let won = false
 
-function randomCard() {
-    return Math.floor(Math.random() * 13) + 1
+function getRandomNum() {
+    let randomNum = Math.floor(Math.random()* 13) + 1
+    
+    if (randomNum > 10) {
+        return 10
+    } else if (randomNum === 1) {
+        return 11
+    } else {
+        return randomNum
+    }
 }
 
 function startGame(){
@@ -25,8 +33,7 @@ function renderGame() {
     playerCards.textContent = "Cards: "
      for (let i = 0; i < cards.length; i++) {
     playerCards.textContent += cards[i] + " "
-     }
-    
+    }
     playerSum.textContent = "Sum: " + sum
     if (sum <= 20) {
         message = "Would you like to draw a new card?"
@@ -42,13 +49,12 @@ function renderGame() {
 
 function hit() {
     messageG.textContent = message = "The dealer agrees to hit the player! (litteraly!)"
-
-    let card = randomCard()
-    sum += card
-
-    cards.push(card)
-    console.log(cards)
-    renderGame()
+    if (active && !won) {
+        let card = getRandomNum()
+        sum += card
+        cards.push(card)
+        renderGame()
+    }
 }
 
 function stand() {
