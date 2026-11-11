@@ -12,7 +12,7 @@
                 <p id="bankroll" class="bankroll">Credits: <strong> </strong></p>
                 <h1>Blackjack</h1>
             </div>
-            <p id="messageg" class="game-message" aria-live="polite">Get your cards. Make your move.</p>
+            <p id="game-message" class="game-message" aria-live="polite">Get your cards. Make your move.</p>
         </header>
         <main>
             <section class="table" aria-label="Blackjack table">
@@ -22,20 +22,20 @@
                         <span class="hand-status">House</span>
                     </div>
                     <div class="cards dealers">
-                        <p id="cardsd">Cards waiting</p>
+                        <p id="dealer-cards">Cards waiting</p>
                     </div>
-                    <p id="sumd" class="hand-sum dealer-sum">Sum: ?</p>
+                    <p id="dealer-sum" class="hand-sum dealer-sum">Sum: ?</p>
                 </section>
 
                 <section class="hand player-hand" aria-labelledby="player-title">
                     <div class="hand-heading">
                         <h2 id="player-title">Your hand</h2>
-                        <span class="hand-status">Player</span>
+                        <span id="player-name" class="hand-status">Player</span>
                     </div>
                     <div class="cards players">
-                        <p id="cardsp">Cards waiting</p>
+                        <p id="player-cards">Cards waiting</p>
                     </div>
-                    <p id="sump" class="hand-sum player-sum">Sum: ?</p>
+                    <p id="player-sum" class="hand-sum player-sum">Sum: ?</p>
                 </section>
             </section>
         </main>

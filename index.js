@@ -1,80 +1,105 @@
-// const dealerCards = document.querySelector("#cardsd");
-// const dealerSum = document.querySelector("#sumd");
+const player = {
+    name: "John Doe",
+    chips: 200
+};
 
-let player = {
-    playerName: " ",
-    Wins: " ",
-    balance: 200  
-}
-let cards = []
+let cards = [];
 let sum = 0;
-let active = false;
-let won = false;
-let addWin = 20;
-let removeWin = 10;
-let message = "";
-const messageG = document.querySelector("#messageg");
-const playerCards = document.querySelector("#cardsp");
-const playerSum = document.querySelector("#sump");
-const balanceSum = document.querySelector("#bankroll");
+let gameIsActive = false;
+let playerHasBlackjack = false;
 
-function checkBalance() {
-    balanceSum.textContent += "$" + player.balance
-}
-console.log(cards)
+const playerNameElement = document.querySelector("#player-name");
+const gameMessageElement = document.querySelector("#game-message");
+const playerCardsElement = document.querySelector("#player-cards");
+const playerSumElement = document.querySelector("#player-sum");
+const bankrollElement = document.querySelector("#bankroll");
 
-function getRandomNum() {
-    let randomNum = Math.floor(Math.random()* 13) + 1
-    
-    if (randomNum > 10) {
-        return 10
-    } else if (randomNum === 1) {
-        return 11
-    } else {
-        return randomNum
+playerNameElement.textContent = player.name;
+updateBankroll();
+
+function getRandomCard() {
+    const randomCard = Math.floor(Math.random() * 13) + 1;
+
+    if (randomCard > 10) {
+        return 10;
     }
+
+    return randomCard === 1 ? 11 : randomCard;
 }
 
 function startGame() {
-    
-    active = true;
-    let fCard = getRandomNum();
-    let sCard = getRandomNum();
-    cards = [fCard, sCard]
-    sum = fCard + sCard 
-    renderGame()
-    console.log(cards)
+    cards = [getRandomCard(), getRandomCard()];
+    sum = calculateHandSum();
+    gameIsActive = true;
+    playerHasBlackjack = false;
+
+    renderGame();
+
+    if (sum === 21) {
+        playerHasBlackjack = true;
+        gameIsActive = false;
+        player.chips += 100;
+        updateBankroll();
+        gameMessageElement.textContent = "You've got blackjack! You won 100 credits.";
+    }
 }
 
 function renderGame() {
-    playerCards.textContent = "Cards: "
-    for (let i = 0; i < cards.length; i++) {
-        playerCards.textContent += cards[i] + " "
-    }
-    playerSum.textContent = "Sum: " + sum
+    playerCardsElement.textContent = `Cards: ${cards.join(" ")}`;
+    playerSumElement.textContent = `Sum: ${sum}`;
+
     if (sum <= 20) {
-        message = "Would you like to draw a new card?"
-    } else if (sum === 21) {
-        message = "You've got blackjack!!!"
-        won = true
-    } else {
-        message = "You've lost, you're out of the game!"
-        active = false
-        balanceSum.textContent += removeWin - balance 
+        gameMessageElement.textContent = "Would you like to draw a new card?";
     }
-    checkBalance()
-    messageG.textContent = message
+
+    updateBankroll();
 }
+
+function calculateHandSum() {
+    let handSum = cards.reduce((total, card) => total + card, 0);
+    let acesCountedAsEleven = cards.filter((card) => card === 11).length;
+
+    while (handSum > 21 && acesCountedAsEleven > 0) {
+        handSum -= 10;
+        acesCountedAsEleven -= 1;
+    }
+
+    return handSum;
+}
+
+function updateBankroll() {
+    bankrollElement.textContent = `Credits: $${player.chips}`;
+}
+
 function hit() {
-    messageG.textContent = message = "The dealer agrees to hit the player! (litteraly!)"
-    if (active && !won) {
-        let card = getRandomNum()
-        sum += card
-        cards.push(card)
-        renderGame()
+    if (!gameIsActive || playerHasBlackjack) {
+        return;
+    }
+
+    cards.push(getRandomCard());
+    sum = calculateHandSum();
+
+    if (sum > 21) {
+        gameIsActive = false;
+        player.chips -= 10;
+        renderGame();
+        gameMessageElement.textContent = "You've gone over 21 and lost 10 credits.";
+        return;
+    }
+
+    renderGame();
+
+    if (sum === 21) {
+        gameIsActive = false;
+        player.chips += 50;
+        updateBankroll();
+        gameMessageElement.textContent = "You've got blackjack! You won 50 credits.";
     }
 }
 
 function stand() {
-    messageG.textContent = message = "the player now stands while playing the game!"
+    if (gameIsActive) {
+        gameIsActive = false;
+        gameMessageElement.textContent = "You chose to stand. Start a new game to play again.";
+    }
 }
