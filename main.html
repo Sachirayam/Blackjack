@@ -1,56 +1,63 @@
 <!DOCTYPE html>
-<html>
+<html lang="swe">
     <head>
-        <!-- <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="style.css">
-        <style> @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
-</style>
         <title>Blackjack</title>
     </head>
     <body>
         <header>
-            <h1>Blackjack</h1>
-            <p id="messageg">Get your cards. make your move</p>
+            <div class="top-bar">
+                <p id="bankroll" class="bankroll">Credits: <strong> </strong></p>
+                <h1>Blackjack</h1>
+            </div>
+            <p id="messageg" class="game-message" aria-live="polite">Get your cards. Make your move.</p>
         </header>
         <main>
-            <div>
-                <p>Dealers hand: </p>
-                <div class="dealers">
-                    <p id="cardsd">cards</p>
-                </div>
-                <p id="sumd" class="dealer-sum">sum: ?</p>
-            </div>
-            <div>
-                <p>My hand: </p>
-                <div class="players">
-                    <p id="cardsp">cards:</p>
+            <section class="table" aria-label="Blackjack table">
+                <section class="hand dealer-hand" aria-labelledby="dealer-title">
+                    <div class="hand-heading">
+                        <h2 id="dealer-title">Dealer's hand</h2>
+                        <span class="hand-status">House</span>
+                    </div>
+                    <div class="cards dealers">
+                        <p id="cardsd">Cards waiting</p>
+                    </div>
+                    <p id="sumd" class="hand-sum dealer-sum">Sum: ?</p>
+                </section>
 
-                </div>
-                <p id="sump" class="player-sum">Your sum: </p>
-            </div>
+                <section class="hand player-hand" aria-labelledby="player-title">
+                    <div class="hand-heading">
+                        <h2 id="player-title">Your hand</h2>
+                        <span class="hand-status">Player</span>
+                    </div>
+                    <div class="cards players">
+                        <p id="cardsp">Cards waiting</p>
+                    </div>
+                    <p id="sump" class="hand-sum player-sum">Sum: ?</p>
+                </section>
+            </section>
         </main>
         <footer>
-            <h1>What will you do next?</h1>
-            <button onclick="startGame()">
-                <h1>Play</h1>
-                <p>
-                    Start a new Game
-                </p>
-            </button>
-            <button onclick="hit()"">
-                <h1>Hit</h1>
-                <p>
-                    Draw a newCard
-                </p>
-            </button>
-            <button onclick="stand()">
-                <h1>Stand</h1>
-                <p>
-                    Keep your hand
-                </p>
-            </button>
+            <section class="controls" aria-labelledby="controls-title">
+                <h2 id="controls-title">Choose your move</h2>
+                <div class="button-group">
+                    <button type="button" class="action-button primary" onclick="startGame()">
+                        <span class="button-title">Play</span>
+                        <span class="button-description">Start a new game</span>
+                    </button>
+                    <button type="button" class="action-button" onclick="hit()">
+                        <span class="button-title">Hit</span>
+                        <span class="button-description">Draw another card</span>
+                    </button>
+                    <button type="button" class="action-button" onclick="stand()">
+                        <span class="button-title">Stand</span>
+                        <span class="button-description">Keep your hand</span>
+                    </button>
+                </div>
+            </section>
         </footer>
-    <script src="index.js"></script>    
+        <script src="index.js"></script>
     </body>
 </html>

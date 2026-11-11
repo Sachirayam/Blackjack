@@ -1,20 +1,31 @@
 // const dealerCards = document.querySelector("#cardsd");
 // const dealerSum = document.querySelector("#sumd");
 
+let player = {
+    playerName: " ",
+    Wins: " ",
+    balance: 200  
+}
 let cards = []
 let sum = 0;
 let active = false;
 let won = false;
+let addWin = 20;
+let removeWin = 10;
 let message = "";
-let messageG = document.querySelector("#messageg");
+const messageG = document.querySelector("#messageg");
 const playerCards = document.querySelector("#cardsp");
 const playerSum = document.querySelector("#sump");
+const balanceSum = document.querySelector("#bankroll");
 
+function checkBalance() {
+    balanceSum.textContent += "$" + player.balance
+}
 console.log(cards)
 
 function getRandomNum() {
     let randomNum = Math.floor(Math.random()* 13) + 1
-
+    
     if (randomNum > 10) {
         return 10
     } else if (randomNum === 1) {
@@ -25,6 +36,7 @@ function getRandomNum() {
 }
 
 function startGame() {
+    
     active = true;
     let fCard = getRandomNum();
     let sCard = getRandomNum();
@@ -34,11 +46,10 @@ function startGame() {
     console.log(cards)
 }
 
-
 function renderGame() {
     playerCards.textContent = "Cards: "
-     for (let i = 0; i < cards.length; i++) {
-    playerCards.textContent += cards[i] + " "
+    for (let i = 0; i < cards.length; i++) {
+        playerCards.textContent += cards[i] + " "
     }
     playerSum.textContent = "Sum: " + sum
     if (sum <= 20) {
@@ -49,7 +60,9 @@ function renderGame() {
     } else {
         message = "You've lost, you're out of the game!"
         active = false
+        balanceSum.textContent += removeWin - balance 
     }
+    checkBalance()
     messageG.textContent = message
 }
 function hit() {
